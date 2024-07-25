@@ -1,24 +1,26 @@
 const addResourcesToCache = async (resources) => {
-   const cache = await caches.open("v3");
+   const cache = await caches.open("v1.4");
    await cache.addAll(resources);
    console.log('active now')
  };
- 
+
+
  self.addEventListener("install", (event) => {
+   const basename = self.location.pathname.includes('/SavvySaver/') ? '/SavvySaver/' : '/'
    event.waitUntil(
      addResourcesToCache([
-       "/",
-       "/index.html",
-       '/images/desktop/404-error.webp',
-       '/images/tablet/404-error.webp',
-       '/images/mobile/404-error.webp',
-       '/images/onboarding/ellipse.svg'
+       `${basename}`,
+       `${basename}index.html`,
+       `${basename}images/desktop/404-error.webp`,
+       `${basename}images/tablet/404-error.webp`,
+       `${basename}images/mobile/404-error.webp`,
+       `${basename}images/onboarding/ellipse.svg`
      ]),
    );
  });
 
  const putInCache = async (request, response) => {
-   const cache = await caches.open("v3");
+   const cache = await caches.open("v1.4");
    await cache.put(request, response);
  };
  
@@ -53,7 +55,7 @@ const addResourcesToCache = async (resources) => {
  };
  
  const deleteOldCaches = async () => {
-   const cacheKeepList = ["v3"];
+   const cacheKeepList = ["v1.4"];
    const keyList = await caches.keys();
    const cachesToDelete = keyList.filter((key) => !cacheKeepList.includes(key));
    await Promise.all(cachesToDelete.map(deleteCache));
