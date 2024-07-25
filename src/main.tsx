@@ -4,9 +4,10 @@ import { App } from './App.tsx'
 import './index.css'
 
 const registerWorker = async () => {
+   let basename = import.meta.env.DEV ? '/' : '/SavvySaver/'
    if ("serviceWorker" in navigator) {
       try {
-         const registration = await navigator.serviceWorker.register("/sw.js", {scope: "/"})
+         const registration = await navigator.serviceWorker.register("/sw.js", {scope: basename})
          if (registration.installing)
             console.log('sw installing')
          else if (registration.waiting)
