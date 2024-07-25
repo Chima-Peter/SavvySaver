@@ -12,7 +12,7 @@ export default defineConfig(({ command }) => {
   }
 
   if (command !== 'serve') {
-    config.base = '/repo_name/'
+    config.base = '/SavvySaver/'
   }
 
   return config
