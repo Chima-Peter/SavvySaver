@@ -1,5 +1,5 @@
 const addResourcesToCache = async (resources) => {
-   const cache = await caches.open("v2");
+   const cache = await caches.open("v3");
    await cache.addAll(resources);
    console.log('active now')
  };
@@ -18,7 +18,7 @@ const addResourcesToCache = async (resources) => {
  });
 
  const putInCache = async (request, response) => {
-   const cache = await caches.open("v2");
+   const cache = await caches.open("v3");
    await cache.put(request, response);
  };
  
@@ -53,7 +53,7 @@ const addResourcesToCache = async (resources) => {
  };
  
  const deleteOldCaches = async () => {
-   const cacheKeepList = ["v2"];
+   const cacheKeepList = ["v3"];
    const keyList = await caches.keys();
    const cachesToDelete = keyList.filter((key) => !cacheKeepList.includes(key));
    await Promise.all(cachesToDelete.map(deleteCache));

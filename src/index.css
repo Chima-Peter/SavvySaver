@@ -5,6 +5,7 @@
 @layer base {
    @font-face {
      font-family: 'Inter';
+     font-display: swap;
      src: url('/fonts/Inter-Regular.ttf');
    }
  }
