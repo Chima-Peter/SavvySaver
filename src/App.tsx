@@ -7,17 +7,17 @@ type Context = '/' | '/SavvySaver/'
 const BaseContext = createContext<Context>('/')
 
 export function App() {
-   const [basename, setBase] = useState<Context>('/')
+   const [base, setBase] = useState<Context>('/')
    useEffect(() => {
       import.meta.env.DEV ? setBase('/') : setBase('/SavvySaver/')
    }, [])
 
   return (
-   <BaseContext.Provider value={basename} >
-      <BrowserRouter>
+   <BaseContext.Provider value={base}>
+      <BrowserRouter  basename={import.meta.env.DEV ? '/' : '/SavvySaver/'}>
          <Routes>
             <Route path="*" element={<ErrorPage />} />
-            <Route path="home" element={<Home />} />
+            <Route path="/" element={<Home />} />
          </Routes> 
       </BrowserRouter>
    </BaseContext.Provider>
