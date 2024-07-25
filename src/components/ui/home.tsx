@@ -1,9 +1,118 @@
+import { useEffect, useState } from "react"
+import { useBaseContext } from "../../App"
+import { motion } from 'framer-motion'
+import "react-responsive-carousel/lib/styles/carousel.min.css"
+import { Carousel } from 'react-responsive-carousel'
+import { useNavigate } from "react-router-dom"
 
 function Home() {
+   const base = useBaseContext()
+   const [enter, setEnter] = useState(true)
+   const navigate = useNavigate()
+
+   const enterVariant = {
+      initial: {
+         y: 50,
+         opacity: 0
+      },
+      final: {
+         y: 0,
+         opacity: 1
+      }
+   }
+   const boxVariants = {
+      initial: {
+         scale: 0.5,
+      },
+      final: {
+         scale: 1,
+         transition: {
+            type: 'tween',
+         }
+      }
+   }
+
+   useEffect(() => {
+      setTimeout(() => {setEnter(false)}, 3000)
+   }, [])
+
+   const handleSignInBtn = () => {
+      navigate('/signup')
+   }
+
+   const handleLogInBtn = () => {
+      navigate('/login')
+   }
+
   return (
-    <div>
-      <h1 className='text-red-500 text-5xl'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur aperiam quam ab odit quibusdam nesciunt assumenda vero consectetur dolorum, pariatur vel, ex hic quia a voluptatibus iusto beatae temporibus tempora.</h1>
-    </div>
+   <main className="font-main flex justify-center items-center min-h-[100vh]">
+      {
+         enter ? <div className="bg-[#7F3DFF] flex w-[100%] min-h-[100vh] justify-center items-center">
+            <motion.div 
+               className='flex justify-center items-center relative w-[100%]'
+               variants={enterVariant}
+               initial='initial'
+               animate='final'
+               transition={{duration: 1.5, type: 'tween'}}>
+               <img src={`${base}images/onboarding/ellipse.svg`}  className="w-20 absolute translate-x-[-50%] translate-y-0-[-50%]"  alt="" />
+               <h1 className="text-white text-4xl lg:text-5xl translate-y-[-5px] font-extrabold">
+                  SavvySaver
+               </h1>
+            </motion.div>
+         </div> 
+         : 
+         <motion.section className='lg:border border-gray-100 lg:w-[800px] p-4 lg:shadow-lg lg:rounded-md md:border md:w-full md:shadow-md md:p-6 flex gap-7 flex-col items-center'  variants={boxVariants} initial='initial' animate='final'>
+            <div className="flex max-w-[400px]">
+               <Carousel 
+                  infiniteLoop useKeyboardArrows={false} autoPlay stopOnHover={false} showIndicators={false} transitionTime={500} showThumbs={false} showArrows={false} showStatus={false} interval={3000}>
+               <div className="flex flex-col justify-center items-center w-fit">
+                     <img src={`${base}images/onboarding/control.webp`} className="max-w-[300px] h-[300px]" />
+                     <div>
+                           <h2 className="font-bold text-black text-xl">
+                              Gain total control of your money
+                           </h2>
+                           <p className="text-xs text-[#91919F] tracking-wider py-2">
+                              Become your own money manager and make every cent count.
+                           </p>
+                     </div>
+                  </div>
+                  <div className="flex flex-col justify-center items-center w-fit">
+                     <img src={`${base}images/onboarding/goes.webp`} className="max-w-[300px] h-[300px]" />
+                     <div>
+                           <h2 className="font-bold text-black text-xl">
+                              Know where your money goes
+                           </h2>
+                           <p className="text-xs text-[#91919F] tracking-wider py-2">
+                              Track your transactions easily with categories and financial report
+                           </p>
+                     </div>
+                  </div>
+                  <div className="flex flex-col justify-center items-center w-fit">
+                     <img src={`${base}images/onboarding/plan.webp`} className="max-w-[300px] h-[300px]" />
+                     <div>
+                           <h2 className="font-bold text-black text-xl">
+                              Planning
+                           </h2>
+                           <p className="text-xs text-[#91919F] tracking-wider py-2 px-1">
+                              Setup your budget for each category so you're in control.
+                           </p>
+                     </div>
+                  </div>
+               </Carousel>
+            </div>
+            <div className="flex md:flex-row flex-col gap-4 w-[100%] items-center justify-center">
+               <button type="button" className="bg-[#7F3DFF] text-[#FCFCFC] border border-[#7F3DFF] rounded-xl text-sm font-bold w-[90%] md:w-[200px] py-3 px-4 hover:bg-[#EEE5FF] hover:border-[#7F3DFF] hover:text-[#7F3DFF] focus:bg-[#EEE5FF] focus:border-[#7F3DFF] focus:outline-none focus:text-[#7F3DFF]" 
+               onClick={handleSignInBtn}>
+                  Sign Up
+               </button>
+               <button type="button" className="bg-[#EEE5FF] border border-[#7F3DFF] rounded-xl text-sm font-bold w-[90%] md:w-[200px] text-[#7F3DFF] py-3 px-4 hover:bg-[#7F3DFF] hover:text-[#FCFCFC] hover:border-[#7F3DFF] focus:outline-none focus:bg-[#7F3DFF] focus:text-[#FCFCFC] focus:border-[#7F3DFF]" 
+               onClick={handleLogInBtn}>
+                  Login
+               </button>
+            </div>
+         </motion.section>
+      }
+   </main>
   )
 }
 
