@@ -3,12 +3,11 @@ import { useBaseContext } from "../../App"
 import { motion } from 'framer-motion'
 import "react-responsive-carousel/lib/styles/carousel.min.css"
 import { Carousel } from 'react-responsive-carousel'
-import { useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 function Home() {
    const base = useBaseContext()
    const [enter, setEnter] = useState(true)
-   const navigate = useNavigate()
 
    const enterVariant = {
       initial: {
@@ -36,16 +35,8 @@ function Home() {
       setTimeout(() => {setEnter(false)}, 3000)
    }, [])
 
-   const handleSignInBtn = () => {
-      navigate('/signup')
-   }
-
-   const handleLogInBtn = () => {
-      navigate('/login')
-   }
-
   return (
-   <main className="font-main flex justify-center items-center min-h-[100vh]">
+   <main className="font-main flex justify-center items-center min-h-[100vh] dark:bg-black">
       {
          enter ? <div className="bg-[#7F3DFF] flex w-[100%] min-h-[100vh] justify-center items-center">
             <motion.div 
@@ -61,17 +52,17 @@ function Home() {
             </motion.div>
          </div> 
          : 
-         <motion.section className='lg:border border-gray-100 lg:w-[800px] p-4 lg:shadow-lg lg:rounded-md md:border md:w-full md:shadow-md md:p-6 flex gap-7 flex-col items-center'  variants={boxVariants} initial='initial' animate='final'>
+         <motion.section className='lg:border border-gray-300 dark:border-0 lg:w-[800px] p-4 lg:shadow-lg lg:rounded-md md:border md:w-full md:shadow-md md:p-6 flex gap-7 flex-col items-center'  variants={boxVariants} initial='initial' animate='final'>
             <div className="flex max-w-[400px]">
                <Carousel 
                   infiniteLoop useKeyboardArrows={false} autoPlay stopOnHover={false} showIndicators={false} transitionTime={500} showThumbs={false} showArrows={false} showStatus={false} interval={3000}>
                <div className="flex flex-col justify-center items-center w-fit">
                      <img src={`${base}images/onboarding/control.webp`} className="max-w-[300px] h-[300px]" />
                      <div>
-                           <h2 className="font-bold text-black text-xl">
+                           <h2 className="font-bold text-black dark:text-white text-xl">
                               Gain total control of your money
                            </h2>
-                           <p className="text-xs text-[#91919F] tracking-wider py-2">
+                           <p className="text-xs text-[#91919F] tracking-wider py-2 dark:text-white">
                               Become your own money manager and make every cent count.
                            </p>
                      </div>
@@ -79,10 +70,10 @@ function Home() {
                   <div className="flex flex-col justify-center items-center w-fit">
                      <img src={`${base}images/onboarding/goes.webp`} className="max-w-[300px] h-[300px]" />
                      <div>
-                           <h2 className="font-bold text-black text-xl">
+                           <h2 className="font-bold text-black dark:text-white text-xl">
                               Know where your money goes
                            </h2>
-                           <p className="text-xs text-[#91919F] tracking-wider py-2">
+                           <p className="text-xs text-[#91919F] tracking-wider py-2 dark:text-white">
                               Track your transactions easily with categories and financial report
                            </p>
                      </div>
@@ -90,25 +81,25 @@ function Home() {
                   <div className="flex flex-col justify-center items-center w-fit">
                      <img src={`${base}images/onboarding/plan.webp`} className="max-w-[300px] h-[300px]" />
                      <div>
-                           <h2 className="font-bold text-black text-xl">
+                           <h2 className="font-bold text-black dark:text-white text-xl">
                               Planning
                            </h2>
-                           <p className="text-xs text-[#91919F] tracking-wider py-2 px-1">
-                              Setup your budget for each category so you're in control.
+                           <p className="text-xs text-[#91919F] tracking-wider py-2 dark:text-white">
+                              Setup your budget for each category so you're always in control of your finances
                            </p>
                      </div>
                   </div>
                </Carousel>
             </div>
             <div className="flex md:flex-row flex-col gap-4 w-[100%] items-center justify-center">
-               <button type="button" className="bg-[#7F3DFF] text-[#FCFCFC] border border-[#7F3DFF] rounded-xl text-sm font-bold w-[90%] md:w-[200px] py-3 px-4 hover:bg-[#EEE5FF] hover:border-[#7F3DFF] hover:text-[#7F3DFF] focus:bg-[#EEE5FF] focus:border-[#7F3DFF] focus:outline-none focus:text-[#7F3DFF]" 
-               onClick={handleSignInBtn}>
+               <Link replace to={'/signup'}  className="bg-[#7F3DFF] text-[#FCFCFC] border border-[#7F3DFF] tracking-wider rounded-xl text-sm font-bold w-[90%] md:w-[300px] py-3 px-4 hover:bg-[#EEE5FF] hover:border-[#7F3DFF] text-center hover:text-[#7F3DFF] focus:bg-[#EEE5FF] focus:border-[#7F3DFF] focus:outline-none focus:text-[#7F3DFF]" 
+               >
                   Sign Up
-               </button>
-               <button type="button" className="bg-[#EEE5FF] border border-[#7F3DFF] rounded-xl text-sm font-bold w-[90%] md:w-[200px] text-[#7F3DFF] py-3 px-4 hover:bg-[#7F3DFF] hover:text-[#FCFCFC] hover:border-[#7F3DFF] focus:outline-none focus:bg-[#7F3DFF] focus:text-[#FCFCFC] focus:border-[#7F3DFF]" 
-               onClick={handleLogInBtn}>
+               </Link>
+               <Link replace to={'/login'}  className="bg-[#EEE5FF] border border-[#FCFCFC] tracking-wide rounded-xl text-sm font-bold w-[90%] md:w-[300px] text-[#7F3DFF] py-3 px-4 hover:bg-[#7F3DFF] hover:text-[#FCFCFC] hover:border-[#7F3DFF] text-center focus:outline-none focus:bg-[#7F3DFF] focus:text-[#FCFCFC] focus:border-[#7F3DFF]" 
+               >
                   Login
-               </button>
+               </Link>
             </div>
          </motion.section>
       }

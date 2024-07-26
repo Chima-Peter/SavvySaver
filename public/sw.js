@@ -15,6 +15,10 @@ const addResourcesToCache = async (resources) => {
        `${basename}images/tablet/404-error.webp`,
        `${basename}images/mobile/404-error.webp`,
        `${basename}images/onboarding/ellipse.svg`
+       `${basename}images/onboarding/control.webp`
+       `${basename}images/onboarding/email.webp`
+       `${basename}images/onboarding/goes.webp`
+       `${basename}images/onboarding/plan.webp`
      ]),
    );
  });
