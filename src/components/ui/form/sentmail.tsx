@@ -18,7 +18,7 @@ function SentMail() {
 
    return (
       <main className='w-full flex min-h-[100vh] gap-10 flex-col items-center font-main font-medium dark:bg-black justify-between' >
-         <section className='border border-gray-300 dark:border-0 lg:w-[800px] shadow-lg rounded-md lg:p-6 py-14 justify-between flex gap-7 flex-col items-center lg:justify-center'>
+         <section className='lg:border lg:border-gray-300 dark:border-0 lg:w-[800px] shadow-lg rounded-md lg:p-6 py-14 justify-between flex gap-7 flex-col items-center lg:justify-center'>
             <div className="flex flex-col gap-4 items-center">
                <motion.img 
                   src={`${base}images/onboarding/email.webp`} 
@@ -43,7 +43,7 @@ function SentMail() {
             </MediaQuery>
          </section>
          <MediaQuery maxWidth={768}>
-            <Link replace to={'/code'}  className="bg-[#7F3DFF] text-[#FCFCFC] border mb-5 border-[#7F3DFF] tracking-wider rounded-xl text-sm font-bold w-[90%] md:w-[300px] py-3 px-4 hover:bg-[#EEE5FF] hover:border-[#7F3DFF] text-center hover:text-[#7F3DFF] focus:bg-[#EEE5FF] focus:border-[#7F3DFF] focus:outline-none focus:text-[#7F3DFF]" >
+            <Link replace to={'/code'}  className="bg-[#7F3DFF] text-[#FCFCFC] border mb-5 border-[#7F3DFF] tracking-wider rounded-xl text-sm font-bold w-[90%] md:w-[300px] py-3 px-4 text-center focus:outline-none">
                Continue
             </Link>
          </MediaQuery>

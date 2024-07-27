@@ -84,7 +84,7 @@ function Code() {
                      Resend now
                   </Link>
                }
-               <button type="submit" className="bg-[#7F3DFF] text-[#FCFCFC] border border-[#7F3DFF] rounded-xl text-sm font-bold dark:font-medium py-2 px-4 hover:bg-[#EEE5FF] hover:border-[#7F3DFF] hover:text-[#7F3DFF] focus:bg-[#EEE5FF] focus:border-[#7F3DFF] focus:outline-none focus:text-[#7F3DFF]" 
+               <button type="submit" className="bg-[#7F3DFF] text-[#FCFCFC] border border-[#7F3DFF] rounded-xl text-sm font-bold dark:font-medium py-2 px-4 focus:outline-none" 
                >
                   Verify
                </button>

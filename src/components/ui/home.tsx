@@ -92,11 +92,11 @@ function Home() {
                </Carousel>
             </div>
             <div className="flex md:flex-row flex-col gap-4 w-[100%] items-center justify-center">
-               <Link replace to={'/signup'}  className="bg-[#7F3DFF] text-[#FCFCFC] border border-[#7F3DFF] tracking-wider rounded-xl text-sm font-bold w-[90%] md:w-[300px] py-3 px-4 hover:bg-[#EEE5FF] hover:border-[#7F3DFF] text-center hover:text-[#7F3DFF] focus:bg-[#EEE5FF] focus:border-[#7F3DFF] focus:outline-none focus:text-[#7F3DFF]" 
+               <Link replace to={'/signup'}  className="bg-[#7F3DFF] text-[#FCFCFC] border border-[#7F3DFF] tracking-wider rounded-xl text-sm font-bold w-[90%] md:w-[300px] py-3 px-4 text-center focus:outline-none" 
                >
                   Sign Up
                </Link>
-               <Link replace to={'/login'}  className="bg-[#EEE5FF] border border-[#FCFCFC] tracking-wide rounded-xl text-sm font-bold w-[90%] md:w-[300px] text-[#7F3DFF] py-3 px-4 hover:bg-[#7F3DFF] hover:text-[#FCFCFC] hover:border-[#7F3DFF] text-center focus:outline-none focus:bg-[#7F3DFF] focus:text-[#FCFCFC] focus:border-[#7F3DFF]" 
+               <Link replace to={'/login'}  className="bg-[#EEE5FF] border border-[#FCFCFC] tracking-wide rounded-xl text-sm font-bold w-[90%] md:w-[300px] text-[#7F3DFF] py-3 px-4 text-center focus:outline-none" 
                >
                   Login
                </Link>

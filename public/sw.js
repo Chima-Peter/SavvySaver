@@ -1,6 +1,7 @@
 const addResourcesToCache = async (resources) => {
-   const cache = await caches.open("v1.4");
+   const cache = await caches.open("version-1.1");
    await cache.addAll(resources);
+   self.skipWaiting();
    console.log('active now')
  };
 
@@ -14,17 +15,17 @@ const addResourcesToCache = async (resources) => {
        `${basename}images/desktop/404-error.webp`,
        `${basename}images/tablet/404-error.webp`,
        `${basename}images/mobile/404-error.webp`,
-       `${basename}images/onboarding/ellipse.svg`
-       `${basename}images/onboarding/control.webp`
-       `${basename}images/onboarding/email.webp`
-       `${basename}images/onboarding/goes.webp`
-       `${basename}images/onboarding/plan.webp`
+       `${basename}images/onboarding/ellipse.svg`,
+       `${basename}images/onboarding/control.webp`,
+       `${basename}images/onboarding/email.webp`,
+       `${basename}images/onboarding/goes.webp`,
+       `${basename}images/onboarding/plan.webp`,
      ]),
    );
  });
 
  const putInCache = async (request, response) => {
-   const cache = await caches.open("v1.4");
+   const cache = await caches.open("version-1.1");
    await cache.put(request, response);
  };
  
@@ -59,15 +60,19 @@ const addResourcesToCache = async (resources) => {
  };
  
  const deleteOldCaches = async () => {
-   const cacheKeepList = ["v1.4"];
+   const cacheKeepList = ["version-1.1"];
    const keyList = await caches.keys();
    const cachesToDelete = keyList.filter((key) => !cacheKeepList.includes(key));
    await Promise.all(cachesToDelete.map(deleteCache));
  };
  
- self.addEventListener("activate", (event) => {
-   event.waitUntil(clients.claim())
-   event.waitUntil(deleteOldCaches());
+self.addEventListener("activate", (event) => {
+   event.waitUntil(
+     (async () => {
+       await deleteOldCaches();
+       await clients.claim(); 
+     })()
+   );
  });
  
  
