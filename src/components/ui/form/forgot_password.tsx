@@ -24,7 +24,7 @@ function ForgotPassword() {
    }
 
    const handleChange = (event: React. ChangeEvent<HTMLInputElement>) => {
-      setForm({ ...form, [event.target.name]: event.target.value})
+      setForm({ ...form, [event.target.name]: event.target.value,  ['emailError']: ''})
    }
 
    const handleSubmit = () => {
@@ -32,6 +32,7 @@ function ForgotPassword() {
       if (!validator.isEmail(form.email))
          handleEmail(form.email)
       else
+         localStorage.setItem('email', JSON.stringify(form.email))
          navigate('/sent_mail')
    }
   return (

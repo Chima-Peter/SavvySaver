@@ -2,10 +2,13 @@ import { useBaseContext } from "../../../App"
 import { Link } from "react-router-dom"
 import { motion } from 'framer-motion'
 import MediaQuery from "react-responsive"
+import { useEffect, useState } from "react"
 
 
 function SentMail() {
    const base = useBaseContext()
+   const [email, setEmail] = useState('')
+   const [show, setShow] = useState(false)
 
    const imgVariants = {
       initial: {
@@ -15,6 +18,14 @@ function SentMail() {
          x: 0
       }
    }
+
+   useEffect(() => {
+      let temp = localStorage.getItem('email')
+      if (temp) {
+         setEmail(JSON.parse(temp))
+         setShow(true)
+      }
+   }, [])
 
    return (
       <main className='w-full flex min-h-[100vh] gap-10 flex-col items-center font-main font-medium dark:bg-black justify-between' >
@@ -31,9 +42,11 @@ function SentMail() {
                      <h2 className="font-bold text-black text-center dark:text-white text-xl">
                         Your email is on it's way
                      </h2>
-                     <p className="text-xs text-[#91919F] tracking-wider py-2 text-center dark:text-white px-2">
-                        We've sent a code for you to use in resetting your password.
-                     </p>
+                     {
+                        show && <p className="text-xs text-[#91919F] tracking-wider py-2 text-center dark:text-white px-2">
+                           We've sent a code to {email} for you to use in resetting your password.
+                        </p>
+                     }
                </div>
             </div>
             <MediaQuery minWidth={768}>

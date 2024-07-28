@@ -77,14 +77,18 @@ function SignUp() {
 
    const handleSubmit = () => {
       event?.preventDefault()
-      if (!validator.isAlpha(signUpData.name))
+      if (!signUpData.name.match(fullNameRegex))
          handleName(signUpData.name)
       else if (!validator.isEmail(signUpData.email))
          handleEmail(signUpData.email)
       else if (!validator.isStrongPassword(signUpData.password))
          handlePassword(signUpData.password)
-      else
-         navigate('')
+      else if (!signUpData.checkbox)
+         return
+      else {
+         localStorage.setItem('name', JSON.stringify(signUpData.name))
+         navigate('/setup1', {replace: true})
+      }
    }
 
   return (
@@ -104,7 +108,7 @@ function SignUp() {
                  <div className='flex items-center relative'>
                       <input ref={passwordRef} type="password" name='password' autoComplete='on' onBlur={passwordBlur} onChange={handleChange} value={signUpData.password} placeholder='Password' id='password' className='w-[100%] px-4 py-2 rounded-lg autofill:bg-clip-text border placeholder:text-xs text-[16px] md:text-sm placeholder:text-[#91919F] border-gray-100 border-t-gray-200 shadow-md focus:outline-none focus:border-2 focus:border-[#F1F1FA] dark:autofill:fill-none dark:autofill:bg-clip-padding'/>
                      {
-                        show ? <IoEyeOutline className='translate-x-[-5%] text-[#91919F] absolute right-[5%] cursor-pointer w-6 h-6 lg:w-4 lg:h-4 dark:text-black' onClick={changeShow}/> : <IoEyeOffOutline   className='translate-x-[-5%] text-[#91919F] absolute dark:text-black right-[5%] cursor-pointer w-6 h-6 lg:w-4 lg:h-4' onClick={changeShow}/>
+                        show ? <IoEyeOutline className='translate-x-[-5%] text-[#91919F] absolute right-[5%] cursor-pointer w-4 h-4 dark:text-black' onClick={changeShow}/> : <IoEyeOffOutline   className='translate-x-[-5%] text-[#91919F] absolute dark:text-black right-[5%] cursor-pointer w-4 h-4' onClick={changeShow}/>
                      }
                  </div>
                   <span className='text-[10px] max-w-[380px] px-1 pt-1 font-medium text-red-600 dark:text-white'>{signUpData.passwordError}</span>

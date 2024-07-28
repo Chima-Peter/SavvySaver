@@ -1,20 +1,24 @@
 import { useState, useRef, useEffect } from "react"
 import Direction from "../../lib/direction"
 import { useNavigate, Link } from "react-router-dom"
+import validator from "validator"
+
+
+interface MyObject {
+  [key: string]: string;
+}
 
 
 function Code() {
    const navigate = useNavigate()
-   const [codeValues, setCodeVal] = useState({
+   const [codeValues, setCodeVal] = useState<MyObject>({
       val1: '',
       val2: '',
       val3: '',
       val4: '',
       val5: '',
       val6: '',
-      valError: ''
    })
-    const numberRegex = /^\d+$/;
    const codesRef =  useRef<(HTMLInputElement | null)[]>([]);
    const [timer, setTimer] =useState(60)
    
@@ -30,28 +34,49 @@ function Code() {
    })
 
    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      const updateData = codeValues;
-      if (event.target.value == '')
+      if (event.target.value == '') {
          event.target.value = ''
-      else if (!event.target.value.match(numberRegex))
-         {
-            event.target.value = ''
-         }
+         setCodeVal({ ...codeValues, [event.target.name]: event.target.value})
+      }
+      else if ((event.target.value).length > 1)
+         codesRef.current[Number(event.target.id)]?.focus()
       else
          {
             setCodeVal({ ...codeValues, [event.target.name]: event.target.value})
             codesRef.current[Number(event.target.id)]?.focus()
          }
-      setCodeVal(updateData)
+   }
+
+   const handleDel = (num: number) => (event: React.KeyboardEvent<HTMLInputElement>) => {
+      if (codesRef.current[num]?.textContent != '') {
+         if (event.key === 'Delete' || event.key === 'Del') {
+            codesRef.current[num]?.focus()
+         } else if (event.key === 'Backspace') {
+            codesRef.current[num]?.focus()
+         }
+      }
+   }
+
+   const handlePaste = (event: React.ClipboardEvent<HTMLInputElement>) => {
+      event.preventDefault()
+      let temp = event.clipboardData.getData('text')
+      setCodeVal({ ...codeValues, ['val1']: temp[0], ['val2']: temp[1], ['val3']: temp[2], ['val4']: temp[3] })
    }
 
    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault()
-      console.log(codeValues)
-      navigate('')
+      let tester = true
+      let index = 0
+      for (const value of Object.values(codeValues)) {
+         if (validator.isEmpty(value)) {
+            codesRef.current[index]?.focus()
+            tester = false
+            break
+         }
+         index++
+      }
+      if (tester) navigate('/reset')
    }
-
-
 
   return (
    <main className='w-full flex min-h-[100vh] gap-14 flex-col items-center font-main font-medium dark:bg-black' >
@@ -60,17 +85,16 @@ function Code() {
          <h1 className="text-2xl text-center dark:font-medium font-bold dark:text-white">
             Enter your verification code
          </h1>
-         <form className='flex flex-col gap-4' noValidate autoComplete='on' onSubmit={handleSubmit}>     
+         <form className='flex flex-col gap-4' noValidate autoComplete='off' onSubmit={handleSubmit}>     
                <div  className='flex flex-col'>
                   <div className="flex gap-2 items-center justify-center">
-                        <input className='border text-center py-1 w-8 text-[#7F3DFF] font-extrabold dark:border-0 border-gray-300 rounded-md focus:shadow-lg focus:border focus:outline-none shadow-md' autoFocus maxLength={1} ref={el => (codesRef.current[0] = el)} onChange={handleChange} id="1" type="text" name='val1' />
-                        <input className='border text-center py-1 w-8 text-[#7F3DFF] font-extrabold dark:border-0 border-gray-300 rounded-md focus:shadow-lg focus:border focus:outline-none shadow-md'  maxLength={1} ref={el => (codesRef.current[1] = el)} onChange={handleChange} id="2" type="text" name='val2' />
-                        <input className='border text-center py-1 w-8 text-[#7F3DFF] font-extrabold dark:border-0 border-gray-300 rounded-md focus:shadow-lg focus:border focus:outline-none shadow-md'  maxLength={1} ref={el => (codesRef.current[2] = el)} onChange={handleChange} id="3" type="text" name='val3' />
-                        <input className='border text-center py-1 w-8 text-[#7F3DFF] font-extrabold dark:border-0 border-gray-300 rounded-md focus:shadow-lg focus:border focus:outline-none shadow-md'  maxLength={1} ref={el => (codesRef.current[3] = el)} onChange={handleChange} id="4" type="text" name='val4' />
-                        <input className='border text-center py-1 w-8 text-[#7F3DFF] font-extrabold dark:border-0 border-gray-300 rounded-md focus:shadow-lg focus:border focus:outline-none shadow-md'  maxLength={1} ref={el => (codesRef.current[4] = el)} onChange={handleChange} id="5" type="text" name='val5' />
-                        <input className='border text-center py-1 w-8 text-[#7F3DFF] font-extrabold dark:border-0 border-gray-300 rounded-md focus:shadow-lg focus:border focus:outline-none shadow-md'  maxLength={1} ref={el => (codesRef.current[5] = el)} onChange={handleChange} id="0" type="text" name='val6' />
+                        <input className='border text-center py-1 w-8 text-[#7F3DFF] font-extrabold dark:border-0 border-gray-300 rounded-md focus:shadow-lg focus:border focus:outline-none shadow-md' autoFocus maxLength={1} autoComplete='off' ref={el => (codesRef.current[0] = el)} onChange={handleChange} onPaste={handlePaste} id="1"  onKeyUp={handleDel(0)} onWheel={() => event?.preventDefault()} type="number" name='val1' />
+                        <input className='border text-center py-1 w-8 text-[#7F3DFF] font-extrabold dark:border-0 border-gray-300 rounded-md focus:shadow-lg focus:border focus:outline-none shadow-md'  maxLength={1} autoComplete='off' ref={el => (codesRef.current[1] = el)} onChange={handleChange} onPaste={handlePaste} id="2"  onKeyUp={handleDel(0)} onWheel={() => event?.preventDefault()} type="number" name='val2' />
+                        <input className='border text-center py-1 w-8 text-[#7F3DFF] font-extrabold dark:border-0 border-gray-300 rounded-md focus:shadow-lg focus:border focus:outline-none shadow-md'  maxLength={1} autoComplete='off' ref={el => (codesRef.current[2] = el)} onChange={handleChange} onPaste={handlePaste} id="3"  onKeyUp={handleDel(1)} onWheel={() => event?.preventDefault()} type="number" name='val3' />
+                        <input className='border text-center py-1 w-8 text-[#7F3DFF] font-extrabold dark:border-0 border-gray-300 rounded-md focus:shadow-lg focus:border focus:outline-none shadow-md'  maxLength={1} autoComplete='off' ref={el => (codesRef.current[3] = el)} onChange={handleChange} onPaste={handlePaste} id="4"  onKeyUp={handleDel(2)} onWheel={() => event?.preventDefault()} type="number" name='val4' />
+                        <input className='border text-center py-1 w-8 text-[#7F3DFF] font-extrabold dark:border-0 border-gray-300 rounded-md focus:shadow-lg focus:border focus:outline-none shadow-md'  maxLength={1} autoComplete='off' ref={el => (codesRef.current[4] = el)} onChange={handleChange} onPaste={handlePaste} id="5"  onKeyUp={handleDel(3)} onWheel={() => event?.preventDefault()} type="number" name='val5' />
+                        <input className='border text-center py-1 w-8 text-[#7F3DFF] font-extrabold dark:border-0 border-gray-300 rounded-md focus:shadow-lg focus:border focus:outline-none shadow-md'  maxLength={1} autoComplete='off' ref={el => (codesRef.current[5] = el)} onChange={handleChange} onPaste={handlePaste} id="5"  onKeyUp={handleDel(4)} onWheel={() => event?.preventDefault()} type="number" name='val6' />
                   </div>
-                  <span className='text-[10px] max-w-[380px] self-center px-1 pt-1 font-medium text-red-600 dark:text-white'>{codeValues.valError}</span>
                </div>
                <p  className='px-2 text-xs text-justify text-black tracking-wide dark:text-white md:w-[45ch]'>
                   We just sent a verification code to your gmail. Check your inbox and enter code to reset password.
