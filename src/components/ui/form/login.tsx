@@ -39,7 +39,7 @@ function LogIn() {
          if (!validator.isEmail(email))
             setLoginData({ ...loginData, ['emailError']: `Email address should be in forrmat of example@gmail.com`})
       } else 
-         setLoginData({ ...loginData, ['emailError']: `Enter email address`})
+         setLoginData({ ...loginData, ['emailError']: `What's your email address`})
    }
 
    const handlePassword = (password: string) => {
@@ -47,7 +47,7 @@ function LogIn() {
          if (!validator.isStrongPassword(password))
             setLoginData({ ...loginData, ['passwordError']: `Password should contain at least one uppercase letter, one lowercase letter, a number and one special character`})
       } else 
-         setLoginData({ ...loginData, ['passwordError']: `Enter password`})
+         setLoginData({ ...loginData, ['passwordError']: `You need a password to continue`})
    }
 
    const handleChange = (event: React. ChangeEvent<HTMLInputElement>) => {
@@ -67,20 +67,20 @@ function LogIn() {
   return (
     <main className='w-full flex min-h-[100vh] gap-10 flex-col items-center font-main font-medium dark:bg-black' >
       <Direction link={'/signup'} text={'Login'} />
-      <section className='lg:border border-gray-300 dark:border-0 lg:w-[800px] p-4 lg:shadow-lg lg:rounded-md md:border md:w-full md:shadow-md md:p-6 md:py-10 flex gap-7 flex-col items-center justify-center'>
+      <section className='lg:border border-gray-300 dark:border-0 lg:w-[800px] p-4 lg:shadow-lg lg:rounded-md md:border md:w-full md:shadow-md md:p-6 md:py-10 flex gap-7 flex-col justify-center'>
          <form className='flex flex-col gap-4' noValidate autoComplete='on' onSubmit={handleSubmit}>     
                <label htmlFor="email" className='flex flex-col w-[100%] text-sm text-black'>
                   <input autoFocus type="email" name='email' autoComplete='on' onBlur={emailBlur} onChange={handleChange} value={loginData.email} placeholder='Email' id='email' className='text-[16px] md:text-sm autofill:bg-clip-text text-black px-4 py-2 rounded-lg border placeholder:text-xs placeholder:text-[#91919F] border-gray-100 border-t-gray-200 shadow-md focus:outline-none focus:border-2 focus:border-[#F1F1FA] dark:autofill:fill-none dark:autofill:bg-clip-padding'/>
-                  <span className='text-[10px] max-w-[380px] self-center px-1 pt-1 font-medium text-red-600 dark:text-white'>{loginData.emailError}</span>
+                  <span className='text-[10px] max-w-[380px] px-1 pt-1 font-medium text-red-600 dark:text-white'>{loginData.emailError}</span>
                </label>
                <label htmlFor="password" className='flex flex-col relative'>
                   <div className='flex items-center relative'>
                      <input ref={passwordRef} type="password" name='password' autoComplete='on' onBlur={passwordBlur} onChange={handleChange} value={loginData.password} placeholder='Password' id='password' className='w-[100%] px-4 py-2 rounded-lg text-[16px] md:text-sm autofill:bg-clip-text border placeholder:text-xs placeholder:text-[#91919F] border-gray-100 border-t-gray-200 shadow-md focus:outline-none focus:border-2 focus:border-[#F1F1FA] dark:autofill:fill-none dark:autofill:bg-clip-padding'/>
                      {
-                        show ? <IoEyeOutline className='translate-x-[-5%] text-[#91919F] absolute right-[5%] cursor-pointer w-4 h-4 dark:text-black' onClick={changeShow}/> : <IoEyeOffOutline   className='translate-x-[-5%] text-[#91919F] absolute dark:text-black right-[5%] cursor-pointer w-4 h-4' onClick={changeShow}/>
+                        show ? <IoEyeOutline className='translate-x-[-5%] text-[#91919F] absolute right-[5%] cursor-pointer w-6 h-6 lg:w-4 lg:h-4 dark:text-black' onClick={changeShow}/> : <IoEyeOffOutline   className='translate-x-[-5%] text-[#91919F] absolute dark:text-black right-[5%] cursor-pointer w-6 h-6 lg:w-4 lg:h-4' onClick={changeShow}/>
                      }
                   </div>
-                  <span className='text-[10px] max-w-[380px] self-center px-1 pt-1 font-medium text-red-600 dark:text-white'>{loginData.passwordError}</span>
+                  <span className='text-[10px] max-w-[380px] px-1 pt-1 font-medium text-red-600 dark:text-white'>{loginData.passwordError}</span>
                </label>
                <div  className='flex px-2 text-[11px] text-white font-medium tracking-tight dark:text-black'>
                   <p className=''>
