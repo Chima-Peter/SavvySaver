@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import validator from "validator"
-
+import { CiBarcode } from "react-icons/ci"
 
 interface MyObject {
   [key: string]: string;
@@ -39,7 +39,6 @@ function SetUpPin02() {
    }
    const handleDel = (num: number) => (event: React.KeyboardEvent<HTMLInputElement>) => {
       if (codesRef.current[num]?.value != '') {
-         console.log(num)
          if (event.key === 'Delete' || event.key === 'Del') {
             codesRef.current[num]?.focus()
          } else if (event.key === 'Backspace') {
@@ -73,24 +72,32 @@ function SetUpPin02() {
    }
 
   return (
-   <main className='w-full flex min-h-[100vh] gap-14 flex-col items-center font-main font-medium dark:bg-black justify-center' >
-         <h1 className="text-md text-center dark:font-medium font-bold dark:text-white">
-            OK. Re type your pin again.
-         </h1>
-         <form className='flex flex-col gap-14' noValidate autoComplete='off' onSubmit={handleSubmit}>     
-               <div  className='flex flex-col'>
-                  <div className="flex gap-2 items-center justify-center">
-                        <input className='border text-center py-1 w-8 text-[#7F3DFF] font-extrabold dark:border-0 border-gray-300 rounded-md focus:shadow-lg focus:border focus:outline-none shadow-md' autoFocus value={codeValues.val1} maxLength={1} autoComplete='off' ref={el => (codesRef.current[0] = el)} onPaste={handlePaste} onChange={handleChange} id="1" onKeyUp={handleDel(3)} onWheel={() => event?.preventDefault()} type="number" name='val1' />
-                        <input className='border text-center py-1 w-8 text-[#7F3DFF] font-extrabold dark:border-0 border-gray-300 rounded-md focus:shadow-lg focus:border focus:outline-none shadow-md'  value={codeValues.val2} maxLength={1} onPaste={handlePaste} onKeyUp={handleDel(0)} autoComplete='off' ref={el => (codesRef.current[1] = el)} onChange={handleChange} id="2" onWheel={() => event?.preventDefault()} type="number" name='val2' />
-                        <input className='border text-center py-1 w-8 text-[#7F3DFF] font-extrabold dark:border-0 border-gray-300 rounded-md focus:shadow-lg focus:border focus:outline-none shadow-md'  value={codeValues.val3} maxLength={1} onPaste={handlePaste} onKeyUp={handleDel(1)} autoComplete='off' ref={el => (codesRef.current[2] = el)} onChange={handleChange} id="3" onWheel={() => event?.preventDefault()} type="number" name='val3' />
-                        <input className='border text-center py-1 w-8 text-[#7F3DFF] font-extrabold dark:border-0 border-gray-300 rounded-md focus:shadow-lg focus:border focus:outline-none shadow-md'  value={codeValues.val4} maxLength={1} onPaste={handlePaste} onKeyUp={handleDel(2)} autoComplete='off' ref={el => (codesRef.current[3] = el)} onChange={handleChange} id="3" onWheel={() => event?.preventDefault()} type="number" name='val4' />
+   <main className='w-full flex min-h-[100vh] gap-6 flex-col items-center font-main font-medium justify-center' >
+         <section className="w-[100%] md:w-fit flex flex-col gap-6 border-y-4 border-x-0 md:border-4 border-gray-200 px-10 py-8 md:rounded-lg">
+            <div className="flex flex-col gap-1">
+               <CiBarcode className="w-6 h-6 self-center text-[#7F3DFF]" />
+               <h1 className="text-md text-center font-bold">
+                  Great! Let's confirm that.
+               </h1>
+               <p className="text-center px-2 text-[11px] font-medium">
+                  Enter the same 4-diit code you just entered for confirmation please.
+               </p>
+            </div>
+            <form className='flex flex-col gap-14' noValidate autoComplete='off' onSubmit={handleSubmit}>     
+                  <div  className='flex flex-col'>
+                     <div className="flex gap-2 items-center justify-center">
+                        <input className='border text-center py-1 w-8 text-[#7F3DFF] shadow-gray-300 font-extrabold border-gray-300 rounded-md focus:shadow-lg focus:border focus:outline-none shadow-md' autoFocus value={codeValues.val1} onPaste={handlePaste} maxLength={1} autoComplete='off' ref={el => (codesRef.current[0] = el)} onChange={handleChange} id="1" onKeyUp={handleDel(0)} onWheel={() => event?.preventDefault()} type="number" name='val1' />
+                        <input className='border text-center py-1 w-8 text-[#7F3DFF] shadow-gray-300 font-extrabold border-gray-300 rounded-md focus:shadow-lg focus:border focus:outline-none shadow-md'  value={codeValues.val2} onPaste={handlePaste} maxLength={1} onKeyUp={handleDel(0)} autoComplete='off' ref={el => (codesRef.current[1] = el)} onChange={handleChange} id="2" onWheel={() => event?.preventDefault()} type="number" name='val2' />
+                        <input className='border text-center py-1 w-8 text-[#7F3DFF] shadow-gray-300 font-extrabold border-gray-300 rounded-md focus:shadow-lg focus:border focus:outline-none shadow-md'  value={codeValues.val3} onPaste={handlePaste} maxLength={1} onKeyUp={handleDel(1)} autoComplete='off' ref={el => (codesRef.current[2] = el)} onChange={handleChange} id="3" onWheel={() => event?.preventDefault()} type="number" name='val3' />
+                        <input className='border text-center py-1 w-8 text-[#7F3DFF] shadow-gray-300 font-extrabold border-gray-300 rounded-md focus:shadow-lg focus:border focus:outline-none shadow-md'  value={codeValues.val4} onPaste={handlePaste} maxLength={1} onKeyUp={handleDel(2)} autoComplete='off' ref={el => (codesRef.current[3] = el)} onChange={handleChange} id="3" onWheel={() => event?.preventDefault()} type="number" name='val4' />
+                     </div>
                   </div>
-               </div>
-               <button type="submit" className="bg-[#7F3DFF] text-[#FCFCFC] border border-[#7F3DFF] rounded-xl text-sm font-bold dark:font-medium py-2 px-4 focus:outline-none w-[200px] translate-y-[100%]" 
-               >
-                  Continue
-               </button>
-         </form>
+                  <button onWheel={() => event?.preventDefault()} type="submit" className="bg-[#7F3DFF] text-[#FCFCFC] border border-[#7F3DFF] rounded-xl text-sm font-bold py-2 px-4 focus:outline-none" 
+                  >
+                     Continue
+                  </button>
+            </form>
+         </section>
    </main>
   )
 }

@@ -36,7 +36,7 @@ function Home() {
    }, [])
 
   return (
-   <main className="font-main flex justify-center items-center min-h-[100vh] dark:bg-black">
+   <main className="font-main flex justify-center items-center min-h-[100vh] w-full">
       {
          enter ? <div className="bg-[#7F3DFF] flex w-[100%] min-h-[100vh] justify-center items-center">
             <motion.div 
@@ -52,17 +52,17 @@ function Home() {
             </motion.div>
          </div> 
          : 
-         <motion.section className='lg:border border-gray-300 dark:border-0 lg:w-[800px] p-4 lg:shadow-lg lg:rounded-md md:border md:w-full md:shadow-md md:p-6 flex gap-7 flex-col items-center'  variants={boxVariants} initial='initial' animate='final'>
+         <motion.section className='lg:border border-gray-300 lg:w-[800px] p-4 lg:shadow-lg lg:rounded-md md:border md:w-full md:shadow-md md:p-6 flex gap-7 flex-col items-center'  variants={boxVariants} initial='initial' animate='final'>
             <div className="flex max-w-[400px]">
                <Carousel 
                   infiniteLoop useKeyboardArrows={false} autoPlay stopOnHover={false} showIndicators={false} transitionTime={500} showThumbs={false} showArrows={false} showStatus={false} interval={3000}>
                <div className="flex flex-col justify-center items-center w-fit">
                      <img src={`${base}images/onboarding/control.webp`} className="max-w-[300px] h-[300px]" />
                      <div>
-                           <h2 className="font-bold text-black dark:text-white text-xl">
+                           <h2 className="font-bold text-black text-xl">
                               Gain total control of your money
                            </h2>
-                           <p className="text-xs text-[#91919F] tracking-wider py-2 dark:text-white">
+                           <p className="text-xs text-[#91919F] tracking-wider py-2 text-center px-2">
                               Become your own money manager and make every cent count.
                            </p>
                      </div>
@@ -70,10 +70,10 @@ function Home() {
                   <div className="flex flex-col justify-center items-center w-fit">
                      <img src={`${base}images/onboarding/goes.webp`} className="max-w-[300px] h-[300px]" />
                      <div>
-                           <h2 className="font-bold text-black dark:text-white text-xl">
+                           <h2 className="font-bold text-black text-xl">
                               Know where your money goes
                            </h2>
-                           <p className="text-xs text-[#91919F] tracking-wider py-2 dark:text-white">
+                           <p className="text-xs text-[#91919F] tracking-wider py-2 text-center px-2">
                               Track your transactions easily with categories and financial report
                            </p>
                      </div>
@@ -81,10 +81,10 @@ function Home() {
                   <div className="flex flex-col justify-center items-center w-fit">
                      <img src={`${base}images/onboarding/plan.webp`} className="max-w-[300px] h-[300px]" />
                      <div>
-                           <h2 className="font-bold text-black dark:text-white text-xl">
+                           <h2 className="font-bold text-black text-xl">
                               Planning
                            </h2>
-                           <p className="text-xs text-[#91919F] tracking-wider py-2 dark:text-white">
+                           <p className="text-xs text-[#91919F] tracking-wider py-2 text-center px-2">
                               Setup your budget for each category so you're always in control of your finances
                            </p>
                      </div>
