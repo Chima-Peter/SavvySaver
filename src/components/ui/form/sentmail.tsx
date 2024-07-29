@@ -1,7 +1,6 @@
 import { useBaseContext } from "../../../App"
 import { Link } from "react-router-dom"
 import { motion } from 'framer-motion'
-import MediaQuery from "react-responsive"
 import { useEffect, useState } from "react"
 
 
@@ -49,17 +48,10 @@ function SentMail() {
                      }
                </div>
             </div>
-            <MediaQuery minWidth={768}>
-               <Link replace to={'/code'}  className="bg-[#7F3DFF] text-[#FCFCFC] border mb-5 border-[#7F3DFF] tracking-wider rounded-xl text-sm font-bold w-[90%] md:w-[300px] py-3 px-4 text-center focus:bg-[#EEE5FF] focus:border-[#7F3DFF] focus:outline-none focus:text-[#7F3DFF]" >
-                  Continue
-               </Link>
-            </MediaQuery>
-         </section>
-         <MediaQuery maxWidth={768}>
-            <Link replace to={'/code'}  className="bg-[#7F3DFF] text-[#FCFCFC] border mb-5 border-[#7F3DFF] tracking-wider rounded-xl text-sm font-bold w-[90%] md:w-[300px] py-3 px-4 text-center focus:outline-none">
+            <Link replace to={'/code'}  className="bg-[#7F3DFF] text-[#FCFCFC] border mb-5 border-[#7F3DFF] tracking-wider rounded-xl text-sm font-bold w-[90%] md:w-[300px] py-3 px-4 text-center focus:bg-[#EEE5FF] focus:border-[#7F3DFF] focus:outline-none focus:text-[#7F3DFF]" >
                Continue
             </Link>
-         </MediaQuery>
+         </section>
       </main>
   )
 }

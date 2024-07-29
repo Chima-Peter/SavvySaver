@@ -26,7 +26,7 @@ function SetUpPin01() {
       }
       else if ((event.target.value).length > 1)
          codesRef.current[Number(event.target.id)]?.focus()
-      else
+      else 
          {
             setCodeVal({ ...codeValues, [event.target.name]: event.target.value})
             codesRef.current[Number(event.target.id)]?.focus()

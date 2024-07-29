@@ -18,7 +18,6 @@ function SetUpPin02() {
    })
    const [code, setCode] = useState({})
    const codesRef =  useRef<(HTMLInputElement | null)[]>([]);
-   
    useEffect(() => {
       let temp = localStorage.getItem('code')
       if (temp) {
