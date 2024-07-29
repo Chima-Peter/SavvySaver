@@ -67,7 +67,7 @@ function SetUpPin02() {
       }
       if (tester) {
          let setup2 = `${codeValues.val1}${codeValues.val2}${codeValues.val3}${codeValues.val4}`
-         if (setup2 === code) navigate('/setup2')
+         if (setup2 === code) navigate('/balance')
       }
    }
 

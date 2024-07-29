@@ -10,6 +10,7 @@ import Code from "./components/ui/form/code"
 import ResetPassword from "./components/ui/form/reset"
 import SetUpPin01 from "./components/ui/setup/setup_pin01"
 import SetUpPin02 from "./components/ui/setup/setup_pin02"
+import SetBalance from "./components/ui/setup/set_balance"
 
 type Context = '/' | '/SavvySaver/'
 const BaseContext = createContext<Context>('/')
@@ -34,6 +35,7 @@ export function App() {
             <Route path="reset" element={<ResetPassword />} />
             <Route path="setup1" element={<SetUpPin01 />} />
             <Route path="setup2" element={<SetUpPin02 />} />
+            <Route path="balance" element={<SetBalance />} />
          </Routes> 
       </BrowserRouter>
    </BaseContext.Provider>
